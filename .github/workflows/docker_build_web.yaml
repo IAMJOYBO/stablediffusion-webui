@@ -23,17 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: 删除缓存
-      uses: actions/cache@v3
-      with:
-        path: |
-          node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-      env:
-        ACTIONS_CACHE_DEBUG: true
-
     - name: 获取当前日期
       id: date
       run: echo "::set-output name=date::$(date +v%Y.%m.%d)"
