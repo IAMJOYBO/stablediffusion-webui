@@ -1,4 +1,4 @@
-# 清华大学 KTransformers Docker 镜像自动构建
+# 清华大学 KTransformers Docker Image Build
 ## Docker镜像列表
 |序号|镜像|版本|
 | ----------- | ----------- | ----------- |
