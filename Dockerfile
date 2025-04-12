@@ -28,6 +28,9 @@ RUN apt install -y --no-install-recommends \
 # 安装CMake
 RUN wget https://github.com/Kitware/CMake/releases/download/v4.0.1/cmake-4.0.1-linux-x86_64.sh && echo y | bash cmake-4.0.1-linux-x86_64.sh && rm -rf cmake-4.0.1-linux-x86_64.sh
 
+# 安装SageAttention2
+RUN git clone https://github.com/thu-ml/SageAttention.git && cd sageattention && python setup.py install
+
 # 克隆代码
 RUN git clone https://github.com/kvcache-ai/ktransformers.git 
 # 清理 apt 缓存
