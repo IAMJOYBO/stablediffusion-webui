@@ -16,9 +16,6 @@ services:
       # - NVIDIA_VISIBLE_DEVICES=0
     volumes:
       - ./DeepSeek-V2-Lite-Chat-GGUF:/app/model/DeepSeek-V2-Lite-Chat-GGUF
-      - ./DeepSeek-R1:/app/model/DeepSeek-R1
-      - ./DeepSeek-V2-Lite-Chat:/app/model/DeepSeek-V2-Lite-Chat
-      - ./DeepSeek-V3-0324:/app/model/DeepSeek-V3-0324
     ports:
       - "10002:10002"
     runtime: nvidia
@@ -53,9 +50,6 @@ services:
       # - NVIDIA_VISIBLE_DEVICES=0
     volumes:
       - ./DeepSeek-V2-Lite-Chat-GGUF:/app/model/DeepSeek-V2-Lite-Chat-GGUF
-      - ./DeepSeek-R1:/app/model/DeepSeek-R1
-      - ./DeepSeek-V2-Lite-Chat:/app/model/DeepSeek-V2-Lite-Chat
-      - ./DeepSeek-V3-0324:/app/model/DeepSeek-V3-0324
     ports:
       - "10002:10002"
     runtime: nvidia
