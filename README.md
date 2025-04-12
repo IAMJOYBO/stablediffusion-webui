@@ -80,19 +80,20 @@ networks:
 2、DeepSeek-V3-0324：/app/model/DeepSeek-V3-0324
 3、DeepSeek-V2-Lite-Chat：/app/model/DeepSeek-V2-Lite-Chat
 
-【启动命令：本地】
-1、DeepSeek-R1：python -m ktransformers.local_chat --model_path /app/model/DeepSeek-R1 --gguf_path /app/model/DeepSeek-R1-GGUF
-2、DeepSeek-V3-0324：python -m ktransformers.local_chat --model_path /app/model/DeepSeek-V3-0324 --gguf_path /app/model/DeepSeek-V3-0324-GGUF
-3、DeepSeek-V2-Lite-Chat：python -m ktransformers.local_chat --model_path /app/model/DeepSeek-V2-Lite-Chat --gguf_path /app/model/DeepSeek-V2-Lite-Chat-GGUF
-（GGUF文件需要下载到对应的目录内）
+【启动命令：LocalChat】（GGUF文件需要下载到对应的目录内，仅允许存在GGUF文件，且不允许存在多个不同量化版本的GGUF）
+1、DeepSeek-R1：python -m ktransformers.local_chat --model_path=/app/model/DeepSeek-R1 --gguf_path=/app/model/DeepSeek-R1-GGUF
+2、DeepSeek-V3-0324：python -m ktransformers.local_chat --model_path=/app/model/DeepSeek-V3-0324 --gguf_path=/app/model/DeepSeek-V3-0324-GGUF
+3、DeepSeek-V2-Lite-Chat：python -m ktransformers.local_chat --model_path=/app/model/DeepSeek-V2-Lite-Chat --gguf_path=/app/model/DeepSeek-V2-Lite-Chat-GGUF
+
+【启动命令：WEB服务】（GGUF文件需要下载到对应的目录内，仅允许存在GGUF文件，且不允许存在多个不同量化版本的GGUF）
+1、DeepSeek-R1：ktransformers --model_path=/app/model/DeepSeek-R1 --gguf_path=/app/model/DeepSeek-R1-GGUF --port=10002 --web=True
+2、DeepSeek-V3-0324：ktransformers --model_path=/app/model/DeepSeek-V3-0324 --gguf_path=/app/model/DeepSeek-V3-0324-GGUF --port=10002 --web=True
+3、DeepSeek-V2-Lite-Chat：ktransformers --model_path=/app/model/DeepSeek-V2-Lite-Chat --gguf_path=/app/model/DeepSeek-V2-Lite-Chat-GGUF --port=10002 --web=True
 
 【部分GGUF的地址：国内可访问】
 1、DeepSeek-R1：https://hf-mirror.com/unsloth/DeepSeek-R1-GGUF
 2、DeepSeek-V3-0324：https://hf-mirror.com/unsloth/DeepSeek-V3-0324-GGUF
 3、DeepSeek-V2-Lite-Chat：https://hf-mirror.com/mradermacher/DeepSeek-V2-Lite-Chat-GGUF
-
-【官方部署文档】
-https://kvcache-ai.github.io/ktransformers/en/install.html
 ```
 # 官方仓库
 [https://github.com/kvcache-ai/ktransformers.git](https://github.com/kvcache-ai/ktransformers.git)
