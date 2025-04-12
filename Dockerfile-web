@@ -55,7 +55,7 @@ RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/n
 RUN apt-get update -y
 RUN apt-get install nodejs -y
 
-# 安装WEB
+# 安装 WEB
 RUN cd ktransformers/website && npm install @vue/cli && npm run build
 
 # 安装 ktransformers 本体（含编译）
