@@ -24,13 +24,14 @@ RUN apt install -y libtbb-dev libssl-dev libcurl4-openssl-dev libaio1 libaio-dev
 RUN git clone https://github.com/kvcache-ai/ktransformers.git && cd ktransformers && git submodule update --init --recursive
 RUN cd ktransformers && /app/miniconda/envs/ktransformers/bin/python -m pip install -U wheel setuptools && bash install.sh
 
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+
 RUN pip install huggingface_hub modelscope
 RUN huggingface-cli download deepseek-ai/DeepSeek-V2-Lite-Chat --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-V2-Lite-Chat
 RUN huggingface-cli download deepseek-ai/DeepSeek-V3-0324 --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-V3-0324
 RUN huggingface-cli download deepseek-ai/DeepSeek-R1 --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-R1
 
-RUN pip pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
-# RUN mkdir -p /app/index-tts && rm -rf /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*ubuntu*
-# COPY sources-20.04.list /etc/apt/sources.list
+RUN mkdir -p /app/index-tts && rm -rf /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*ubuntu*
+COPY sources-20.04.list /etc/apt/sources.list
 
 CMD tail -f README.txt
