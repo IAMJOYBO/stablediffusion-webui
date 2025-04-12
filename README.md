@@ -4,6 +4,7 @@
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 |01|joybo/ktransformers|v2025.4.12-action|2025.4.12|NATIVE|2.6.0+cu126|
 > CPU_INSTRUCT=NATIVE：启用当前CPU支持的所有原生指令集
+> [PyTorch基础镜像：https://hub.docker.com/r/pytorch/pytorch/tags](https://hub.docker.com/r/pytorch/pytorch/tags)
 ## Docker Compose 示例
 ```yaml
 services:
