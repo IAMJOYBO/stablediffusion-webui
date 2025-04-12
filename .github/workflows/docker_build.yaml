@@ -22,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+
     - name: 删除缓存
       uses: actions/cache@v3
       with:
@@ -32,7 +33,12 @@ jobs:
           ${{ runner.os }}-node-
       env:
         ACTIONS_CACHE_DEBUG: true
-    
+    - name: 安装 gh-actions-cache-manager
+      run: npm install gh-actions-cache-manager --save-dev
+    - name: 清除所有缓存
+      run: npx gh-actions-cache-manager purge all
+
+
     - name: 获取当前日期
       id: date
       run: echo "::set-output name=date::$(date +v%Y.%m.%d)"
