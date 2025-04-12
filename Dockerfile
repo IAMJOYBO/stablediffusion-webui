@@ -13,7 +13,7 @@ ENV PATH=/app/miniconda/bin:$PATH
 
 RUN echo yes | conda create --name ktransformers python=3.11
 SHELL ["conda", "run", "-n", "ktransformers", "/bin/bash", "-c"]
-RUN conda install -c conda-forge libstdcxx-ng && strings ~/anaconda3/envs/ktransformers/lib/libstdc++.so.6 | grep GLIBCXX
+RUN conda install -c conda-forge libstdcxx-ng && strings /app/miniconda/envs/ktransformers/lib/libstdc++.so.6 | grep GLIBCXX
 RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 RUN pip install packaging ninja cpufeature numpy
 
