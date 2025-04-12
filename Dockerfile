@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 COPY README.txt ./
 
 RUN apt update && apt install -y build-essential cmake ninja-build patchelf wget net-tools curl iputils-ping git git-lfs
+RUN wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/CUDA.sh && bash CUDA.sh
 
 RUN mkdir -p /app
 WORKDIR /app
