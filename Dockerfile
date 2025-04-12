@@ -21,7 +21,7 @@ RUN pip install packaging ninja cpufeature numpy
 RUN apt install -y libtbb-dev libssl-dev libcurl4-openssl-dev libaio1 libaio-dev libgflags-dev zlib1g-dev libfmt-dev libnuma-dev
 
 RUN git clone https://github.com/kvcache-ai/ktransformers.git && cd ktransformers && git submodule update --init --recursive
-RUN cd ktransformers && bash install.sh
+RUN cd ktransformers && /app/miniconda/envs/ktransformers/bin/python -m pip install -U wheel setuptools && bash install.sh
 
 RUN pip install libstdcxx-ng
 RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
