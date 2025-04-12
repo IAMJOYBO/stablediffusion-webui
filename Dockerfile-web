@@ -56,7 +56,7 @@ RUN apt-get update -y
 RUN apt-get install nodejs -y
 
 # 安装WEB
-RUN cd ktransformers/website && npm install @vue/cli && npm run build && cd ../../ && pip install .
+RUN cd ktransformers/website && npm install @vue/cli && npm run build
 
 # 安装 ktransformers 本体（含编译）
 RUN CPU_INSTRUCT=${CPU_INSTRUCT} \
