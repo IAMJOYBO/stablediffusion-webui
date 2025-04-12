@@ -1,4 +1,4 @@
-FROM ubuntu20.04
+FROM ubuntu22.04
 ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND=noninteractive
 COPY README.txt ./
@@ -35,6 +35,6 @@ RUN huggingface-cli download deepseek-ai/DeepSeek-R1 --exclude *.safetensors --l
 
 RUN pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 # RUN mkdir -p /app/index-tts && rm -rf /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*ubuntu*
-# COPY sources-20.04.list /etc/apt/sources.list
+# COPY sources-22.04.list /etc/apt/sources.list
 
 CMD tail -f README.txt
