@@ -99,9 +99,9 @@ https://kvcache-ai.github.io/ktransformers/en/install.html
 [https://kvcache-ai.github.io/ktransformers/en/install.html](https://kvcache-ai.github.io/ktransformers/en/install.html)
 # WEB 部署文档
 [https://kvcache-ai.github.io/ktransformers/en/api/server/website.html](https://kvcache-ai.github.io/ktransformers/en/api/server/website.html)
-# 官方 Docker 部署文档
+# Docker 部署文档
 [https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/Docker.md](https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/Docker.md)
-# 官方 Dockerfile
+# Dockerfile 文件
 [https://github.com/kvcache-ai/ktransformers/blob/main/Dockerfile](https://github.com/kvcache-ai/ktransformers/blob/main/Dockerfile)
 
 # Star History
