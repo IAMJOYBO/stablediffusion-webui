@@ -7,10 +7,11 @@ RUN apt update && apt install -y build-essential cmake ninja-build patchelf wget
 
 RUN mkdir -p /app
 WORKDIR /app
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -b -p /app/conda
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -b -p /app/miniconda
+RUN /app/miniconda/bin/conda init bash
+ENV PATH=/app/miniconda/bin:$PATH
 
-RUN /app/conda/bin/conda init
-RUN conda create --name ktransformers python=3.11
+RUN echo yes | conda create --name ktransformers python=3.11
 SHELL ["conda", "run", "-n", "ktransformers", "/bin/bash", "-c"]
 RUN conda activate ktransformers
 RUN conda install -c conda-forge libstdcxx-ng && strings ~/anaconda3/envs/ktransformers/lib/libstdc++.so.6 | grep GLIBCXX
