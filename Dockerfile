@@ -39,7 +39,7 @@ WORKDIR /workspace/ktransformers
 RUN git submodule update --init --recursive
 
 # 升级 pip
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip && pip install -U wheel setuptools
 
 # 安装构建依赖
 RUN pip install ninja pyproject numpy cpufeature aiohttp zmq openai
