@@ -76,6 +76,5 @@ https://kvcache-ai.github.io/ktransformers/en/install.html
 [![Star History Chart](https://api.star-history.com/svg?repos=IAMJOYBO/ktransformers&type=Date)](https://www.star-history.com/#IAMJOYBO/ktransformers&Date)
 
 <div align="center">
-  <p>© 2024-2025 Limitee. 保留所有权利。</p>
   <p>如有问题，请提交 <a href="https://github.com/IAMJOYBO/ktransformers/issues">GitHub Issue</a></p>
 </div>
