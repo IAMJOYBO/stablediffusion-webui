@@ -32,6 +32,6 @@ RUN huggingface-cli download deepseek-ai/DeepSeek-V3-0324 --exclude *.safetensor
 RUN huggingface-cli download deepseek-ai/DeepSeek-R1 --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-R1
 
 RUN mkdir -p /app/index-tts && rm -rf /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*ubuntu*
-COPY sources-22.04.list /etc/apt/sources.list
+COPY sources-20.04.list /etc/apt/sources.list
 
 CMD tail -f README.txt
