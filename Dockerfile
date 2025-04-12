@@ -12,6 +12,7 @@ WORKDIR /app
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -b -p /app/miniconda
 RUN /app/miniconda/bin/conda init
 ENV PATH=/app/miniconda/bin:$PATH
+RUN conda update conda --yes
 
 RUN echo yes | conda create --name ktransformers python=3.11
 SHELL ["conda", "run", "-n", "ktransformers", "/bin/bash", "-c"]
