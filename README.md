@@ -1,6 +1,6 @@
 # 清华大学 KTransformers Docker Image Build
 ## Docker镜像列表（registry.cn-hangzhou.aliyuncs.com）
-|序号|镜像|版本|构建时间|编译|版本|
+|序号|镜像|Tag|构建时间|编译|版本|
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 |01|joybo/ktransformers|v2025.4.12-action|2025.4.12|NATIVE|2.6.0+cu126|
 > CPU_INSTRUCT=NATIVE：启用当前CPU支持的所有原生指令集
