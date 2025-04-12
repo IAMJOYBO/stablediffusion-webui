@@ -2,7 +2,7 @@ name: web
 
 on:
   push:
-    paths: ['Dockerfile-build']
+    paths: ['Dockerfile-web']
   workflow_dispatch:
     inputs:
       env:
