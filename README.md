@@ -1,8 +1,8 @@
 # 清华大学 KTransformers Docker Image Build
 ## Docker镜像列表（registry.cn-hangzhou.aliyuncs.com）
-|序号|Image|Tag|构建时间|指令集|PyTorch版本|
-| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-|01|joybo/ktransformers|v2025.4.12-action|2025.4.12|NATIVE|2.6.0+cu126|
+|序号|Image|Tag|构建时间|指令集|PyTorch版本|最新镜像|
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+|01|joybo/ktransformers|v2025.4.12-action|2025.4.12|NATIVE|2.6.0+cu126|[最新镜像](https://github.com/IAMJOYBO/ktransformers/actions)|
 > PyTorch基础镜像：[https://hub.docker.com/r/pytorch/pytorch/tags](https://hub.docker.com/r/pytorch/pytorch/tags)
 ## Docker Compose 示例
 ```yaml
