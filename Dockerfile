@@ -23,8 +23,10 @@ RUN apt install -y --no-install-recommends \
     wget \
     vim \
     gcc \
-    g++ \
-    cmake
+    g++
+
+# 安装CMake
+RUN wget https://github.com/Kitware/CMake/releases/download/v4.0.1/cmake-4.0.1-linux-x86_64.sh && bash cmake-4.0.1-linux-x86_64.sh && rm -rf cmake-4.0.1-linux-x86_64.sh
 
 # 克隆代码
 RUN git clone https://github.com/kvcache-ai/ktransformers.git 
