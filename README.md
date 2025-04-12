@@ -61,5 +61,9 @@ https://kvcache-ai.github.io/ktransformers/en/install.html
 ```
 # 官方仓库
 [https://github.com/kvcache-ai/ktransformers.git](https://github.com/kvcache-ai/ktransformers.git)
-# 官方部署文档
+# 官方本地部署文档
 [https://kvcache-ai.github.io/ktransformers/en/install.html](https://kvcache-ai.github.io/ktransformers/en/install.html)
+# 官方 Docker 部署文档
+[https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/Docker.md](https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/Docker.md)
+# 官方 Dockerfile
+[https://github.com/kvcache-ai/ktransformers/blob/main/Dockerfile](https://github.com/kvcache-ai/ktransformers/blob/main/Dockerfile)
