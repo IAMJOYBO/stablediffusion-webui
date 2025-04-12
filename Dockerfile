@@ -30,4 +30,7 @@ RUN huggingface-cli download deepseek-ai/DeepSeek-V2-Lite-Chat --exclude *.safet
 RUN huggingface-cli download deepseek-ai/DeepSeek-V3-0324 --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-V3-0324
 RUN huggingface-cli download deepseek-ai/DeepSeek-R1 --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-R1
 
+RUN mkdir -p /app/index-tts && rm -rf /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*ubuntu*
+COPY sources-22.04.list /etc/apt/sources.list
+
 CMD tail -f README.txt
