@@ -1,15 +1,15 @@
 # Adding CUDA to PATH
 if [ -d "/usr/local/cuda-12.6/bin" ]; then
-    export PATH=$PATH:/usr/local/cuda/bin
+    export PATH=$PATH:/usr/local/cuda-12.6/bin
 fi
 
 if [ -d "/usr/local/cuda-12.6/lib64" ]; then
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-12.6/lib64
     # Or you can add it to /etc/ld.so.conf and run ldconfig as root:
     # echo "/usr/local/cuda-12.x/lib64" | sudo tee -a /etc/ld.so.conf
     # sudo ldconfig
 fi
 
 if [ -d "/usr/local/cuda-12.6" ]; then
-    export CUDA_PATH=$CUDA_PATH:/usr/local/cuda
+    export CUDA_PATH=$CUDA_PATH:/usr/local/cuda-12.6
 fi
