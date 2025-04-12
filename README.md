@@ -3,7 +3,7 @@
 |序号|Image|Tag|构建时间|指令集|PyTorch版本|NEW|
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 |01|joybo/ktransformers|v2025.4.12-action|2025.4.12|NATIVE|2.6.0+cu126|[最新镜像](https://github.com/IAMJOYBO/ktransformers/actions)|
-|02|joybo/ktransformers|v2025.4.12-action-web|2025.4.12|NATIVE|2.6.0+cu126|[最新镜像](https://github.com/IAMJOYBO/ktransformers/actions)|
+|02|joybo/ktransformers|v2025.4.13-action-web|2025.4.13|NATIVE|2.6.0+cu126|[最新镜像](https://github.com/IAMJOYBO/ktransformers/actions)|
 > PyTorch基础镜像：[https://hub.docker.com/r/pytorch/pytorch/tags](https://hub.docker.com/r/pytorch/pytorch/tags)
 ## Docker Compose 示例（无WEB）
 ```yaml
@@ -43,7 +43,7 @@ networks:
 ```yaml
 services:
   ktransformers:
-    image: registry.cn-hangzhou.aliyuncs.com/joybo/ktransformers:v2025.04.12-action-web
+    image: registry.cn-hangzhou.aliyuncs.com/joybo/ktransformers:v2025.04.13-action-web
     container_name: ktransformers
     hostname: ktransformers
     environment:
