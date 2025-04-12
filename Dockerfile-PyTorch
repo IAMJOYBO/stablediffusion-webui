@@ -1,0 +1,32 @@
+FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-devel
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Shanghai
+
+RUN apt update && apt upgrade -y && apt install -y gcc g++ cmake wget curl git git-lfs tree net-tools apt-utils iputils-ping
+RUN wget https://github.com/Kitware/CMake/releases/download/v4.0.1/cmake-4.0.1-linux-x86_64.sh && echo y | bash cmake-4.0.1-linux-x86_64.sh && rm -rf cmake-4.0.1-linux-x86_64.sh
+RUN wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/CUDA_ENV.sh && bash CUDA_ENV.sh && rm -rf CUDA_ENV.sh
+
+RUN apt update && apt install -y build-essential cmake ninja-build patchelf
+
+RUN mkdir -p /app
+WORKDIR /app
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -b -p /app/miniconda
+RUN /app/miniconda/bin/conda init
+ENV PATH=/app/miniconda/bin:$PATH
+
+RUN echo yes | conda update conda
+RUN echo yes | conda create --name ktransformers python=3.11
+SHELL ["conda", "run", "-n", "ktransformers", "/bin/bash", "-c"]
+RUN conda install -c conda-forge libstdcxx-ng && strings /app/miniconda/envs/ktransformers/lib/libstdc++.so.6 | grep GLIBCXX
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+RUN pip install packaging ninja cpufeature numpy
+
+RUN apt install -y libtbb-dev libssl-dev libcurl4-openssl-dev libaio1 libaio-dev libgflags-dev zlib1g-dev libfmt-dev libnuma-dev
+
+RUN git clone https://github.com/kvcache-ai/ktransformers.git && cd ktransformers && git submodule update --init --recursive
+RUN cd ktransformers && bash install.sh
+
+RUN rm -rf /var/lib/apt/lists/*
+
+# 保持容器运行（调试用）
+ENTRYPOINT ["tail", "-f", "/dev/null"]
