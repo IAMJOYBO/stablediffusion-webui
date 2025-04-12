@@ -67,16 +67,5 @@ RUN huggingface-cli download deepseek-ai/DeepSeek-R1 --exclude *.safetensors --l
 RUN huggingface-cli download deepseek-ai/DeepSeek-V3-0324 --exclude *.safetensors --local-dir /app/model/DeepSeek-V3-0324
 RUN huggingface-cli download deepseek-ai/DeepSeek-V2-Lite-Chat --exclude *.safetensors --local-dir /app/model/DeepSeek-V2-Lite-Chat
 
-# 安装WEB所需环境
-RUN apt-get update -y && apt-get install -y apt-transport-https ca-certificates curl gnupg
-RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /usr/share/keyrings/nodesource.gpg
-RUN chmod 644 /usr/share/keyrings/nodesource.gpg
-RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_23.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
-RUN apt-get update -y
-RUN apt-get install nodejs -y
-
-# 安装WEB
-RUN cd ktransformers/website && npm install @vue/cli && npm run build && cd ../../ && pip install .
-
 # 保持容器运行（调试用）
 ENTRYPOINT ["tail", "-f", "/dev/null"]
