@@ -23,7 +23,7 @@ services:
     restart: no
     networks:
       - ktransformers
-    command: ktransformers --model_path /app/model/deepseek-ai/DeepSeek-V2-Lite-Chat --gguf_path /app/model/DeepSeek-V2-Lite-GGUF  --port 10002 --web True
+    entrypoint: ["ktransformers", "--model_path=/app/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/app/model/DeepSeek-V2-Lite-GGUF", "--port=10002", "--web=True"]
 
 networks:
   ktransformers:
