@@ -5,7 +5,7 @@ COPY README.txt ./
 
 RUN apt update && apt install -y build-essential cmake ninja-build patchelf wget net-tools curl iputils-ping git git-lfs apt-utils
 RUN wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/CUDA.sh && bash CUDA.sh
-RUN wget https://github.com/Kitware/CMake/releases/download/v4.0.1/cmake-4.0.1-linux-x86_64.sh && bash cmake-4.0.1-linux-x86_64.sh
+RUN wget https://github.com/Kitware/CMake/releases/download/v4.0.1/cmake-4.0.1-linux-x86_64.sh && echo y | bash cmake-4.0.1-linux-x86_64.sh
 
 ENV CUDA_HOME=/usr/local/cuda-12.6
 
