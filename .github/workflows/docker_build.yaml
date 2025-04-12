@@ -62,8 +62,8 @@ jobs:
       run: sudo rm -rf /opt/*cache*
         
     - name: 构建和上传Docker镜像
-      env:
-        IMAGE_TAG: ${{ steps.date.outputs.date }}-action # 用于标记容器版本号
       run: |
-        docker build -t ${{ env.server }}/${{ env.own }}/${{ env.repo }}:$IMAGE_TAG .
-        docker push  ${{ env.server }}/${{ env.own }}/${{ env.repo }}:$IMAGE_TAG
+        docker build -t ${{ env.server }}/${{ env.own }}/${{ env.repo }}:${{ steps.date.outputs.date }}-action .
+        docker push  ${{ env.server }}/${{ env.own }}/${{ env.repo }}:${{ steps.date.outputs.date }}-action
+    - name: Docker Pull 命令
+      run: echo "docker pull ${{ env.server }}/${{ env.own }}/${{ env.repo }}:${{ steps.date.outputs.date }}-action"
