@@ -8,7 +8,7 @@
 ```yaml
 services:
   ktransformers:
-    image: ktransformers
+    image: registry.cn-hangzhou.aliyuncs.com/joybo/ktransformers:v2025.4.12-action
     container_name: ktransformers
     hostname: ktransformers
     environment:
