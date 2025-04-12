@@ -5,3 +5,4 @@ dpkg -i cuda-repo-ubuntu2004-12-8-local_12.8.1-570.124.06-1_amd64.deb
 cp /var/cuda-repo-ubuntu2004-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
 apt-get update
 apt-get -y install cuda-toolkit-12-8
+apt-get install -y cuda-drivers
