@@ -6,7 +6,7 @@
 |01|v2025.4.12-action|2025.4.12|NATIVE|2.6.0+cu126|[最新镜像](https://github.com/IAMJOYBO/ktransformers/actions/workflows/docker_build.yaml)|❌|
 |02|v2025.4.13-action-web|2025.4.13|NATIVE|2.6.0+cu126|[最新镜像](https://github.com/IAMJOYBO/ktransformers/actions/workflows/docker_build_web.yaml)|✅|
 > PyTorch基础镜像：[https://hub.docker.com/r/pytorch/pytorch/tags](https://hub.docker.com/r/pytorch/pytorch/tags)
-## Docker Compose 示例（无WEB）
+### Docker Compose 示例（无WEB）
 ```yaml
 services:
   ktransformers:
@@ -40,7 +40,7 @@ networks:
     driver: bridge
     name: ktransformers
 ```
-## Docker Compose 示例（带WEB）
+### Docker Compose 示例（带WEB）
 ```yaml
 services:
   ktransformers:
@@ -74,7 +74,7 @@ networks:
     driver: bridge
     name: ktransformers
 ```
-# Docker Image 说明
+### Docker Image 说明
 ```
 【预下载的模型配置】
 1、DeepSeek-R1：/app/model/DeepSeek-R1
@@ -96,15 +96,15 @@ networks:
 2、DeepSeek-V3-0324：https://hf-mirror.com/unsloth/DeepSeek-V3-0324-GGUF
 3、DeepSeek-V2-Lite-Chat：https://hf-mirror.com/mradermacher/DeepSeek-V2-Lite-Chat-GGUF
 ```
-# 官方仓库
+## 官方仓库
 [https://github.com/kvcache-ai/ktransformers.git](https://github.com/kvcache-ai/ktransformers.git)
-# 官方部署文档
+## 官方部署文档
 [https://kvcache-ai.github.io/ktransformers/en/install.html](https://kvcache-ai.github.io/ktransformers/en/install.html)
-# WEB 部署文档
+## WEB 部署文档
 [https://kvcache-ai.github.io/ktransformers/en/api/server/website.html](https://kvcache-ai.github.io/ktransformers/en/api/server/website.html)
-# Docker 部署文档
+## Docker 部署文档
 [https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/Docker.md](https://github.com/kvcache-ai/ktransformers/blob/main/doc/en/Docker.md)
-# Dockerfile 文件
+## Dockerfile 文件
 [https://github.com/kvcache-ai/ktransformers/blob/main/Dockerfile](https://github.com/kvcache-ai/ktransformers/blob/main/Dockerfile)
 
 # Star History
