@@ -25,8 +25,8 @@ RUN pip install packaging ninja cpufeature numpy
 RUN apt install -y libtbb-dev libssl-dev libcurl4-openssl-dev libaio1 libaio-dev libgflags-dev zlib1g-dev libfmt-dev libnuma-dev
 
 RUN git clone https://github.com/kvcache-ai/ktransformers.git && cd ktransformers && git submodule update --init --recursive
-RUN cd ktransformers && /app/miniconda/envs/ktransformers/bin/python -m pip install -U pip && pip install -U wheel setuptools
-RUN bash install.sh
+RUN /app/miniconda/envs/ktransformers/bin/python -m pip install -U pip && pip install -U wheel setuptools
+RUN cd ktransformers && bash install.sh
 
 RUN pip install huggingface_hub modelscope
 RUN huggingface-cli download deepseek-ai/DeepSeek-V2-Lite-Chat --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-V2-Lite-Chat
