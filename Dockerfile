@@ -1,53 +1,63 @@
-FROM ubuntu:20.04
-ENV TZ=Asia/Shanghai
-ENV DEBIAN_FRONTEND=noninteractive
-COPY README.txt ./
+# FROM pytorch/pytorch:2.5.1-cuda12.1-cudnn9-devel as compile_server
+FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-devel as compile_server
 
-# 安装基础环境
-RUN apt update && apt upgrade -y && apt install -y build-essential cmake ninja-build patchelf wget net-tools curl iputils-ping git git-lfs apt-utils
+ARG CPU_INSTRUCT=NATIVE
 
-# 安装cmake、gcc、g++
-RUN wget https://github.com/Kitware/CMake/releases/download/v4.0.1/cmake-4.0.1-linux-x86_64.sh && echo y | bash cmake-4.0.1-linux-x86_64.sh
-RUN apt install -y gcc g++ && apt list --installed | grep -E "gcc|g++|cmake"
+# 设置工作目录和 CUDA 路径
+WORKDIR /workspace
+ENV CUDA_HOME=/usr/local/cuda
 
-# 安装CUDA、NVCC
-RUN wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/CUDA_ENV.sh && bash CUDA_ENV.sh
-RUN wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/cuda-toolkit.sh && bash cuda-toolkit.sh
-RUN wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/nvcc.sh && bash nvcc.sh
+# 安装依赖
+RUN apt update -y
+RUN apt install -y --no-install-recommends \
+    libtbb-dev \
+    libssl-dev \
+    libcurl4-openssl-dev \
+    libaio1 \
+    libaio-dev \
+    libfmt-dev \
+    libgflags-dev \
+    zlib1g-dev \
+    patchelf \
+    git \
+    wget \
+    vim \
+    gcc \
+    g++ \
+    cmake
 
-# 安装Conda环境
-RUN mkdir -p /app
-WORKDIR /app
-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh -b -p /app/miniconda
-RUN /app/miniconda/bin/conda init
-ENV PATH=/app/miniconda/bin:$PATH
-RUN echo yes | conda update conda
+# 克隆代码
+RUN git clone https://github.com/kvcache-ai/ktransformers.git 
+# 清理 apt 缓存
+RUN rm -rf /var/lib/apt/lists/*
 
-# 创建并激活Conda环境
-RUN echo yes | conda create --name ktransformers python=3.11
-SHELL ["conda", "run", "-n", "ktransformers", "/bin/bash", "-c"]
-RUN conda install -c conda-forge libstdcxx-ng && strings /app/miniconda/envs/ktransformers/lib/libstdc++.so.6 | grep GLIBCXX
-RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
-RUN pip install packaging ninja cpufeature numpy
+# 进入项目目录
+WORKDIR /workspace/ktransformers
+# 初始化子模块
+RUN git submodule update --init --recursive
 
-# 依赖环境部署
-RUN apt install -y libtbb-dev libssl-dev libcurl4-openssl-dev libaio1 libaio-dev libgflags-dev zlib1g-dev libfmt-dev libnuma-dev
+# 升级 pip
+RUN pip install --upgrade pip
 
-# KTransformers环境部署
-RUN git clone https://github.com/kvcache-ai/ktransformers.git && cd ktransformers && git submodule update --init --recursive
-RUN /app/miniconda/envs/ktransformers/bin/python -m pip install -U pip && pip install -U wheel setuptools
-RUN cd ktransformers && bash install.sh
+# 安装构建依赖
+RUN pip install ninja pyproject numpy cpufeature aiohttp zmq openai
 
-# 下载大模型配置
-RUN pip install huggingface_hub modelscope
-RUN huggingface-cli download deepseek-ai/DeepSeek-V2-Lite-Chat --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-V2-Lite-Chat
-RUN huggingface-cli download deepseek-ai/DeepSeek-V3-0324 --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-V3-0324
-RUN huggingface-cli download deepseek-ai/DeepSeek-R1 --exclude *.safetensors --local-dir /app/model/deepseek-ai/DeepSeek-R1
+# 安装 flash-attn（提前装可以避免后续某些编译依赖出错）
+RUN pip install flash-attn
 
-# 配置国内源
-RUN pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
-# RUN mkdir -p /app/index-tts && rm -rf /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*ubuntu*
-# COPY sources-20.04.list /etc/apt/sources.list
+# 安装 ktransformers 本体（含编译）
+RUN CPU_INSTRUCT=${CPU_INSTRUCT} \
+    USE_BALANCE_SERVE=1 \
+    KTRANSFORMERS_FORCE_BUILD=TRUE \
+    TORCH_CUDA_ARCH_LIST="8.0;8.6;8.7;8.9;9.0+PTX" \
+    pip install . --no-build-isolation --verbose
 
-# 启动命令
-CMD tail -f README.txt
+RUN pip install third_party/custom_flashinfer/
+# 清理 pip 缓存
+RUN pip cache purge
+
+# 拷贝 C++ 运行时库
+RUN cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/conda/lib/
+
+# 保持容器运行（调试用）
+ENTRYPOINT ["tail", "-f", "/dev/null"]
