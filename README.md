@@ -1,10 +1,5 @@
 # 清华大学 KTransformers Docker Image Build
 ## Docker镜像列表
-<style>
-table {
-margin: auto;
-}
-</style>
 |序号|镜像|版本|构建时间|
 | ----------- | ----------- | ----------- | ----------- |
 |01|registry.cn-hangzhou.aliyuncs.com/joybo/ktransformers|v2025.4.12-action|2025.4.12|
