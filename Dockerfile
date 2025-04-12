@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04
+FROM ubuntu20.04
 ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND=noninteractive
 COPY README.txt ./
@@ -6,8 +6,8 @@ COPY README.txt ./
 RUN apt update && apt install -y build-essential cmake ninja-build patchelf wget net-tools curl iputils-ping git git-lfs apt-utils
 RUN wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/CUDA.sh && bash CUDA.sh
 RUN wget https://github.com/Kitware/CMake/releases/download/v4.0.1/cmake-4.0.1-linux-x86_64.sh && echo y | bash cmake-4.0.1-linux-x86_64.sh
-
-ENV CUDA_HOME=/usr/local/cuda-12.6
+RUN wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/cuda-toolkit.sh && bash cuda-toolkit.sh
+RUN wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/nvcc.sh && bash nvcc.sh
 
 RUN mkdir -p /app
 WORKDIR /app
