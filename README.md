@@ -4,7 +4,7 @@
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 |01|joybo/ktransformers|v2025.4.12-action|2025.4.12|NATIVE|2.6.0+cu126|[最新镜像](https://github.com/IAMJOYBO/ktransformers/actions)|
 > PyTorch基础镜像：[https://hub.docker.com/r/pytorch/pytorch/tags](https://hub.docker.com/r/pytorch/pytorch/tags)
-## Docker Compose 示例
+## Docker Compose 示例（无WEB）
 ```yaml
 services:
   ktransformers:
@@ -34,7 +34,44 @@ services:
     restart: no
     networks:
       - ktransformers
-    entrypoint: ["python", "-m", "ktransformers.local_chat", "--model_path=/app/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/app/model/DeepSeek-V2-Lite-Chat-GGUF", "--port=10002", "--web=True"]
+    entrypoint: ["python", "-m", "ktransformers.local_chat", "--model_path=/app/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/app/model/DeepSeek-V2-Lite-Chat-GGUF"]
+
+networks:
+  ktransformers:
+    driver: bridge
+    name: ktransformers
+```
+## Docker Compose 示例（带WEB）
+```yaml
+services:
+  ktransformers:
+    image: registry.cn-hangzhou.aliyuncs.com/joybo/ktransformers:v2025.04.12-action-web
+    container_name: ktransformers
+    hostname: ktransformers
+    environment:
+      - TZ=Asia/Shanghai
+      # - NVIDIA_VISIBLE_DEVICES=0
+    volumes:
+      - ./DeepSeek-V2-Lite-Chat-GGUF:/app/model/DeepSeek-V2-Lite-Chat-GGUF
+      - ./DeepSeek-R1:/app/model/DeepSeek-R1
+      - ./DeepSeek-V2-Lite-Chat:/app/model/DeepSeek-V2-Lite-Chat
+      - ./DeepSeek-V3-0324:/app/model/DeepSeek-V3-0324
+    ports:
+      - "10002:10002"
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            # device_ids: ['0']
+            capabilities: [gpu]
+    stdin_open: true
+    tty: true
+    restart: no
+    networks:
+      - ktransformers
+    entrypoint: ["ktransformers", "--model_path=/app/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/app/model/DeepSeek-V2-Lite-Chat-GGUF", "--port=10002", "--web=True"]
 
 networks:
   ktransformers:
