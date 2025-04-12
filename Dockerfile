@@ -1,4 +1,4 @@
-FROM ubuntu22.04
+FROM ubuntu:22.04
 ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND=noninteractive
 COPY README.txt ./
