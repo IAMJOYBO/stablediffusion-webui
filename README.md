@@ -34,13 +34,12 @@ services:
     restart: no
     networks:
       - ktransformers
-    entrypoint: ["ktransformers", "--model_path=/app/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/app/model/DeepSeek-V2-Lite-Chat-GGUF", "--port=10002", "--web=True"]
+    entrypoint: ["python", "-m", "ktransformers.local_chat", "--model_path=/app/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/app/model/DeepSeek-V2-Lite-Chat-GGUF", "--port=10002", "--web=True"]
 
 networks:
   ktransformers:
     driver: bridge
     name: ktransformers
-
 ```
 # Docker Image 说明
 ```
