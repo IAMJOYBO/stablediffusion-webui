@@ -1,7 +1,7 @@
 # FROM pytorch/pytorch:2.5.1-cuda12.1-cudnn9-devel as compile_server
 FROM pytorch/pytorch:2.6.0-cuda12.6-cudnn9-devel as compile_server
 
-ARG CPU_INSTRUCT=AVX2
+ARG CPU_INSTRUCT=NATIVE
 
 # 设置工作目录和 CUDA 路径
 WORKDIR /workspace
