@@ -73,7 +73,7 @@ RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg -
 RUN chmod 644 /usr/share/keyrings/nodesource.gpg
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/nodesource.gpg] https://deb.nodesource.com/node_23.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 RUN apt-get update -y
-RUN apt-get install nodejs npm -y
+RUN apt-get install nodejs -y
 
 # 安装WEB
 RUN cd ktransformers/website && npm install @vue/cli && npm run build && cd ../../ && pip install .
