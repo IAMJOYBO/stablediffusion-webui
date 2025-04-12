@@ -61,5 +61,10 @@ RUN pip cache purge
 # 拷贝 C++ 运行时库
 RUN cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/conda/lib/
 
+RUN pip install huggingface_hub modelscope
+RUN huggingface-cli download deepseek-ai/DeepSeek-R1 --exclude *.safesensors --local-dir /app/model/DeepSeek-R1
+RUN huggingface-cli download deepseek-ai/DeepSeek-V3-0324 --exclude *.safesensors --local-dir /app/model/DeepSeek-V3-0324
+RUN huggingface-cli download deepseek-ai/DeepSeek-V2-Lite-Chat --exclude *.safesensors --local-dir /app/model/DeepSeek-V2-Lite-Chat
+
 # 保持容器运行（调试用）
 ENTRYPOINT ["tail", "-f", "/dev/null"]
