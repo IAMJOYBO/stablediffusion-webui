@@ -1,7 +1,7 @@
 FROM ubuntu:24.04
 ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND=noninteractive
-RUN mkdir -p /app
+RUN mkdir -p /app && apt update && apt install -y sudo
 WORKDIR /app
 RUN groupadd -r sd-webui && useradd -r -g sd-webui sd-webui
 USER sd-webui
