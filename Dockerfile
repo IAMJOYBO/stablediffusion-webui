@@ -3,12 +3,12 @@ ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir -p /app && apt update && apt install -y sudo
-RUN echo "sd-webui ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN echo "sd-webui ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 WORKDIR /app
 RUN groupadd -r sd-webui && useradd -r -g sd-webui sd-webui
 USER sd-webui
 
-RUN sudo apt update && sudo apt vim upgrade -y && sudo apt install -y wget curl net-tools tree git git-lfs iputils-ping
+RUN sudo apt update && sudo apt upgrade -y && sudo apt install -y vim wget curl net-tools tree git git-lfs iputils-ping
 RUN sudo apt install git software-properties-common -y
 RUN sudo add-apt-repository ppa:deadsnakes/ppa -y
 RUN sudo apt install python3.10-venv -y
