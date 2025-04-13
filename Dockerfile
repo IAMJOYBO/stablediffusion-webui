@@ -13,10 +13,13 @@ RUN sudo apt install -y libgoogle-perftools4 libtcmalloc-minimal4
 RUN sudo apt install git software-properties-common -y
 RUN sudo add-apt-repository ppa:deadsnakes/ppa -y
 
-RUN sudo apt install python3.10-venv -y
+RUN sudo apt install python3.12-venv -y
 RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 WORKDIR /app/stable-diffusion-webui
+RUN cd extensions && git clone https://github.com/d8ahazard/sd_dreambooth_extension.git
+RUN source venv/bin/activate && cd extensions/sd_dreambooth_extension && pip install -r requirements.txt
 RUN python3.10 -m venv venv
 RUN ./webui.sh --skip-torch-cuda-test
+RUN source venv/bin/activate && pip install -U torch torchvision torchaudio xformers --index-url https://download.pytorch.org/whl/cu126
 
 CMD ["./webui.sh"]
