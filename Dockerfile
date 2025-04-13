@@ -22,9 +22,8 @@ WORKDIR /app/stable-diffusion-webui
 RUN cd extensions && git clone https://github.com/d8ahazard/sd_dreambooth_extension.git
 
 RUN python3.12 -m venv venv
-RUN . /app/stable-diffusion-webui/venv/bin/activate
-RUN cd extensions/sd_dreambooth_extension && pip install -r requirements.txt
+RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreambooth_extension && pip install -r requirements.txt
 RUN ./webui.sh --skip-torch-cuda-test
-RUN pip install -U torch torchvision torchaudio xformers --index-url https://download.pytorch.org/whl/cu126
+RUN . /app/stable-diffusion-webui/venv/bin/activate && pip install -U torch torchvision torchaudio xformers --index-url https://download.pytorch.org/whl/cu126
 
 CMD ["./webui.sh"]
