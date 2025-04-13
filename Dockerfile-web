@@ -75,6 +75,12 @@ RUN pip cache purge
 # 拷贝 C++ 运行时库
 RUN cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /opt/conda/lib/
 
+# 安装部分个人使用的工具
+RUN apt install -y net-tools tree vim curl git git-lfs neofetch 
+# apt修改为国内源
+RUN rm -rf /etc/apt/sources.list && wget https://github.com/IAMJOYBO/ktransformers/raw/refs/heads/main/sources-20.04.list -O /etc/apt/sources.list
+RUN pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+
 # 预下载的配置文件
 RUN pip install huggingface_hub modelscope
 RUN huggingface-cli download deepseek-ai/DeepSeek-R1 --exclude *.safetensors --local-dir /app/model/DeepSeek-R1
