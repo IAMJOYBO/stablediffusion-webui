@@ -14,6 +14,8 @@ RUN sudo add-apt-repository ppa:deadsnakes/ppa -y
 RUN sudo apt install python3.10-venv -y
 RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
+RUN apt install -y libgoogle-perftools4 libtcmalloc-minimal4
+
 WORKDIR /app/stable-diffusion-webui
 RUN python3.10 -m venv venv
 RUN ./webui.sh --skip-torch-cuda-test
