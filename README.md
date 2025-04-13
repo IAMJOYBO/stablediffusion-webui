@@ -76,6 +76,14 @@ networks:
     driver: bridge
     name: ktransformers
 ```
+由于官方的WEB的问题，无法正常使用WEBUI聊天，需要先修改config.js
+(/workspace/ktransformers/ktransformers/website/public/config.js)
+```js
+window.configWeb = {
+    apiUrl: '/v1',
+    port: 8080,
+  };
+```
 ### Docker Image 说明
 ```
 【预下载的模型配置】
