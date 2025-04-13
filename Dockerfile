@@ -2,7 +2,7 @@ FROM ubuntu:24.04
 ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN mkdir -p /app && apt update && apt install -y sudo
+RUN mkdir -p /app && apt update && apt install -y sudo && chmod 777 /app
 RUN echo "sd-webui ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 WORKDIR /app
 RUN groupadd -r sd-webui && useradd -r -g sd-webui sd-webui
