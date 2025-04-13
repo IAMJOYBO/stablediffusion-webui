@@ -16,6 +16,6 @@ RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
 WORKDIR /app/stable-diffusion-webui
 RUN python3.10 -m venv venv
-RUN ./webui.sh
+RUN ./webui.sh --skip-torch-cuda-test
 
-CMD ["webui.sh"]
+CMD ["./webui.sh"]
