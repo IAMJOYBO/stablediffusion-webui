@@ -41,6 +41,8 @@ networks:
     name: ktransformers
 ```
 ### Docker Compose 示例（带WEB）
+API目录：直接访问 http://<IP地址>:10002/docs 进入到 api 的目录，具体请参见 [fastapi](https://fastapi.tiangolo.com/zh/#api) 官方文档
+进入聊天：http://<IP地址>:10002/web/index.html#/chat
 ```yaml
 services:
   ktransformers:
