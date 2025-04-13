@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM nvcr.io/nvidia/cuda:12.6.3-cudnn-runtime-ubuntu22.04
 ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND=noninteractive
 
