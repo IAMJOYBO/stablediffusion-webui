@@ -1,10 +1,11 @@
 services:
   ktransformers:
-    image: registry.cn-hangzhou.aliyuncs.com/joybo/ktransformers:v2025.04.12-action-web
+    image: registry.cn-hangzhou.aliyuncs.com/joybo/ktransformers:v2025.04.13-action-web
     container_name: ktransformers
     hostname: ktransformers
     environment:
       - TZ=Asia/Shanghai
+      - COMMANDLINE_ARGS="--share --listen"
       # - NVIDIA_VISIBLE_DEVICES=0
     volumes:
       - ./DeepSeek-V2-Lite-Chat-GGUF:/model/DeepSeek-V2-Lite-Chat-GGUF
@@ -24,7 +25,7 @@ services:
     restart: no
     networks:
       - ktransformers
-    entrypoint: ["ktransformers", "--model_path=/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/model/DeepSeek-V2-Lite-Chat-GGUF", "--host=0.0.0.0", "--port=8080", "--web=True", "--force-think"]
+    entrypoint: ["ktransformers", "--model_path=/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/model/DeepSeek-V2-Lite-Chat-GGUF", "--port=8080", "--web=True", "--host=0.0.0.0", "--force_think"]
 
 networks:
   ktransformers:
