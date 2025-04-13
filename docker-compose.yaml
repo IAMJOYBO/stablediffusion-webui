@@ -1,15 +1,12 @@
 services:
-  ktransformers:
-    image: registry.cn-hangzhou.aliyuncs.com/joybo/ktransformers:v2025.04.13-action-web
-    container_name: ktransformers
-    hostname: ktransformers
+  sd-webui:
+    image: registry.cn-hangzhou.aliyuncs.com/joybo/stablediffusion-webui:v2025.04.14-action
+    container_name: sd-webui
+    hostname: sd-webui
     environment:
       - TZ=Asia/Shanghai
-      - COMMANDLINE_ARGS="--share --listen"
-      # - NVIDIA_VISIBLE_DEVICES=0
     volumes:
-      - ./DeepSeek-V2-Lite-Chat-GGUF:/model/DeepSeek-V2-Lite-Chat-GGUF
-      - ./DeepSeek-V2-Lite-Chat:/model/DeepSeek-V2-Lite-Chat
+      - ./:/app/stable-diffusion-webui
     ports:
       - "8080:8080"
     runtime: nvidia
