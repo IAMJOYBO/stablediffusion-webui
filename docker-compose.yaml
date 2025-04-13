@@ -10,7 +10,7 @@ services:
       - ./DeepSeek-V2-Lite-Chat-GGUF:/model/DeepSeek-V2-Lite-Chat-GGUF
       - ./DeepSeek-V2-Lite-Chat:/model/DeepSeek-V2-Lite-Chat
     ports:
-      - "10002:10002"
+      - "8080:8080"
     runtime: nvidia
     deploy:
       resources:
@@ -24,7 +24,7 @@ services:
     restart: no
     networks:
       - ktransformers
-    entrypoint: ["ktransformers", "--model_path=/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/model/DeepSeek-V2-Lite-Chat-GGUF", "--port=10002", "--web=True"]
+    entrypoint: ["ktransformers", "--model_path=/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/model/DeepSeek-V2-Lite-Chat-GGUF", "--port=8080", "--web=True"]
 
 networks:
   ktransformers:
