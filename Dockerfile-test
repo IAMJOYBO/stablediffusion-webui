@@ -3,13 +3,13 @@ ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND=noninteractive
 
 # 创建普通用户，并赋予sudo权限，不需要输入密码
-RUN mkdir -p /app && apt update && apt install -y sudo && chmod -R 777 /app && rm -rf /var/lib/apt/lists/*
+RUN mkdir -p /app && apt update && apt install -y sudo && chmod -R 777 /app && apt clean && rm -rf /var/lib/apt/lists/*
 RUN echo "sd-webui ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 WORKDIR /app
 RUN groupadd -r sd-webui && useradd -m -g sd-webui sd-webui && chmod -R 777 /home/sd-webui
 
 # 安装依赖包和用户自定义包
-RUN apt update && apt upgrade -y && apt install -y vim wget curl net-tools tree git git-lfs iputils-ping libgoogle-perftools4 libtcmalloc-minimal4 software-properties-common && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt upgrade -y && apt install -y vim wget curl net-tools tree git git-lfs iputils-ping libgoogle-perftools4 libtcmalloc-minimal4 software-properties-common && apt clean && rm -rf /var/lib/apt/lists/*
 RUN add-apt-repository ppa:deadsnakes/ppa -y && rm -rf /var/lib/apt/lists/*
 
 # 安装Python3.10
@@ -24,6 +24,6 @@ RUN cd extensions && git clone https://github.com/d8ahazard/sd_dreambooth_extens
 
 # 创建Python虚拟环境
 RUN python3.10 -m venv venv
-RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreambooth_extension && pip install -r requirements.txt && cd ../.. && ./webui.sh --skip-torch-cuda-test --exit && . /app/stable-diffusion-webui/venv/bin/activate && pip cache purge && rm -rf /var/lib/apt/lists/*
+RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreambooth_extension && pip install -r requirements.txt && cd ../.. && ./webui.sh --skip-torch-cuda-test --exit && . /app/stable-diffusion-webui/venv/bin/activate && pip cache purge && apt clean && rm -rf /var/lib/apt/lists/*
 
 CMD ./webui.sh --listen --port=7860 --allow-code --api --xformers
