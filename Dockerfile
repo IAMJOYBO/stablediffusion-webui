@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN mkdir -p /app && apt update && apt install -y sudo && chmod -R 777 /app
 RUN echo "sd-webui ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 WORKDIR /app
-RUN groupadd -r sd-webui && useradd -r -g sd-webui sd-webui && chmod -R 777 /home/sd-webui
+RUN groupadd -r sd-webui && useradd -r -g sd-webui sd-webui -d /home/sd-webui && chmod -R 777 /home/sd-webui
 
 # 安装依赖包和用户自定义包
 RUN apt update && sudo apt upgrade -y && apt install -y vim wget curl net-tools tree git git-lfs iputils-ping
