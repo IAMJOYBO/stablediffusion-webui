@@ -8,11 +8,13 @@ RUN echo "sd-webui ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 WORKDIR /app
 RUN groupadd -r sd-webui && useradd -r -g sd-webui sd-webui
 
+# 安装依赖包和用户自定义包
 RUN apt update && sudo apt upgrade -y && apt install -y vim wget curl net-tools tree git git-lfs iputils-ping
 RUN apt install -y libgoogle-perftools4 libtcmalloc-minimal4
 RUN apt install git software-properties-common -y
 RUN add-apt-repository ppa:deadsnakes/ppa -y
 
+# 安装Python3.10
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
 RUN apt install python3.10-venv -y
 
@@ -24,7 +26,7 @@ RUN cd extensions && git clone https://github.com/d8ahazard/sd_dreambooth_extens
 
 # 创建Python虚拟环境
 RUN python3.10 -m venv venv
-RUN ./webui.sh --skip-torch-cuda-test
+RUN ./webui.sh --skip-torch-cuda-test --exit
 RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreambooth_extension && pip install -r requirements.txt
 
-CMD ["./webui.sh"]
+CMD ./webui.sh --listen --port=7860 --allow-code --api --xformers
