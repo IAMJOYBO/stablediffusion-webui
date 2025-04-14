@@ -30,7 +30,7 @@ RUN cd extensions && git clone https://github.com/d8ahazard/sd_dreambooth_extens
 # 创建Python虚拟环境
 RUN python3.10 -m venv venv
 RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreambooth_extension && pip install -r requirements.txt
-RUN ./webui.sh --exit
+RUN ./webui.sh --skip-torch-cuda-test --exit
 
 # 清理缓存
 RUN . /app/stable-diffusion-webui/venv/bin/activate && pip cache purge
