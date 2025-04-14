@@ -3,10 +3,10 @@ ENV TZ=Asia/Shanghai
 ENV DEBIAN_FRONTEND=noninteractive
 
 # 创建普通用户，并赋予sudo权限，不需要输入密码
-RUN mkdir -p /app && apt update && apt install -y sudo && chmod 777 /app
+RUN mkdir -p /app && apt update && apt install -y sudo && chmod -R 777 /app
 RUN echo "sd-webui ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 WORKDIR /app
-RUN groupadd -r sd-webui && useradd -r -g sd-webui sd-webui
+RUN groupadd -r sd-webui && useradd -r -g sd-webui sd-webui && chmod -R 777 /home/sd-webui
 
 # 安装依赖包和用户自定义包
 RUN apt update && sudo apt upgrade -y && apt install -y vim wget curl net-tools tree git git-lfs iputils-ping
@@ -33,6 +33,6 @@ RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreamboo
 RUN ./webui.sh --exit
 
 # 清理缓存
-RUN . /app/stable-diffusion-webui/venv/bin/activate && sudo pip cache purge
+RUN . /app/stable-diffusion-webui/venv/bin/activate && pip cache purge
 
 CMD ./webui.sh --listen --port=7860 --allow-code --api --xformers
