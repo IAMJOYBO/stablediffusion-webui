@@ -24,7 +24,7 @@ services:
     restart: no
     networks:
       - sd-webui
-    command: ./webui.sh --listen --port=7860 --allow-code --api --xformers
+    # command: ./webui.sh --listen --port=7860 --allow-code --api --xformers
 
 networks:
   sd-webui:
