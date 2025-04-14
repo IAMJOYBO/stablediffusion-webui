@@ -18,6 +18,9 @@ RUN add-apt-repository ppa:deadsnakes/ppa -y
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
 RUN apt install python3.10-venv -y
 
+# 清除apt缓存
+RUN rm -rf /var/lib/apt/lists/*
+
 # 使用sd-webui克隆仓库
 USER sd-webui
 RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
@@ -26,10 +29,10 @@ RUN cd extensions && git clone https://github.com/d8ahazard/sd_dreambooth_extens
 
 # 创建Python虚拟环境
 RUN python3.10 -m venv venv
-RUN ./webui.sh --exit
 RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreambooth_extension && pip install -r requirements.txt
+RUN ./webui.sh --exit
 
 # 清理缓存
-RUN . /app/stable-diffusion-webui/venv/bin/activate && pip cache purge && rm -rf /var/lib/apt/lists/*
+RUN . /app/stable-diffusion-webui/venv/bin/activate && pip cache purge
 
 CMD ./webui.sh --listen --port=7860 --allow-code --api --xformers
