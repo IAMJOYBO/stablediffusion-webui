@@ -7,6 +7,7 @@ services:
       - TZ=Asia/Shanghai
       - HF_ENDPOINT=https://hf-mirror.com
     volumes:
+      - ./:/app/stable-diffusion-webui
       - E:\ComfyUI\models:/app/stable-diffusion-webui/models
     ports:
       - "7860:7860"
