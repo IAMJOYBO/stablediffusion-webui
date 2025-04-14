@@ -9,7 +9,7 @@ WORKDIR /app
 RUN groupadd -r sd-webui && useradd -m -g sd-webui sd-webui && chmod -R 777 /home/sd-webui
 
 # 安装依赖包和用户自定义包
-RUN apt update && apt upgrade -y && apt install -y vim wget curl net-tools tree git git-lfs iputils-ping libgoogle-perftools4 libtcmalloc-minimal4 software-properties-common && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt upgrade -y && apt install -y vim wget curl net-tools tree git git-lfs iputils-ping libgoogle-perftools4 libtcmalloc-minimal4 software-properties-common libgl1 bc && apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN add-apt-repository ppa:deadsnakes/ppa -y && rm -rf /var/lib/apt/lists/*
 
 # 安装Python3.10
@@ -25,5 +25,8 @@ RUN cd extensions && git clone https://github.com/d8ahazard/sd_dreambooth_extens
 # 创建Python虚拟环境
 RUN python3.10 -m venv venv
 RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreambooth_extension && pip install -r requirements.txt && cd ../.. && ./webui.sh --skip-torch-cuda-test --exit && . /app/stable-diffusion-webui/venv/bin/activate && pip cache purge && sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*
+
+RUN rm -rf /etc/apt/sources.list && rm -rf /etc/apt/sources.list.d/*ubuntu* && wget https://github.com/IAMJOYBO/stablediffusion-webui/raw/refs/heads/main/sources-22.04.list -O /etc/apt/sources.list
+RUN . /app/stable-diffusion-webui/venv/bin/activate && pip config set global.index-url https://mirrors.aliyun.com/pypi/simple && pip config set install.trusted-host mirrors.aliyun.com
 
 CMD ./webui.sh --listen --port=7860 --allow-code --api --xformers
