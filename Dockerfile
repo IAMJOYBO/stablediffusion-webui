@@ -29,4 +29,7 @@ RUN python3.10 -m venv venv
 RUN ./webui.sh --skip-torch-cuda-test --exit
 RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreambooth_extension && pip install -r requirements.txt
 
+# 清理缓存
+RUN . /app/stable-diffusion-webui/venv/bin/activate && pip cache purge && rm -rf /var/lib/apt/lists/*
+
 CMD ./webui.sh --listen --port=7860 --allow-code --api --xformers
