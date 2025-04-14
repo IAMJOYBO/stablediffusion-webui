@@ -33,6 +33,6 @@ RUN . /app/stable-diffusion-webui/venv/bin/activate && cd extensions/sd_dreamboo
 RUN ./webui.sh --exit
 
 # 清理缓存
-RUN . /app/stable-diffusion-webui/venv/bin/activate && pip cache purge
+RUN . /app/stable-diffusion-webui/venv/bin/activate && sudo pip cache purge
 
 CMD ./webui.sh --listen --port=7860 --allow-code --api --xformers
