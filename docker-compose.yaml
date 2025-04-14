@@ -24,7 +24,7 @@ services:
     restart: no
     networks:
       - sd-webui
-    # command: ./webui.sh --listen --port=7860 --allow-code --api --xformers --enable-insecure-extension-access
+    entrypoint: ./webui.sh --listen --port=7860 --allow-code --api --xformers --enable-insecure-extension-access
 
 networks:
   sd-webui:
