@@ -5,10 +5,11 @@ services:
     hostname: sd-webui
     environment:
       - TZ=Asia/Shanghai
+      - HF_ENDPOINT=https://hf-mirror.com
     volumes:
-      - ./:/app/stable-diffusion-webui
+      - E:\ComfyUI\models:/app/stable-diffusion-webui/models
     ports:
-      - "8080:8080"
+      - "7860:7860"
     runtime: nvidia
     deploy:
       resources:
@@ -21,10 +22,10 @@ services:
     tty: true
     restart: no
     networks:
-      - ktransformers
-    entrypoint: ["ktransformers", "--model_path=/model/DeepSeek-V2-Lite-Chat", "--gguf_path=/model/DeepSeek-V2-Lite-Chat-GGUF", "--port=8080", "--web=True", "--host=0.0.0.0", "--force_think"]
+      - sd-webui
+    command: ./webui.sh --listen --port=7860 --allow-code --api --xformers
 
 networks:
-  ktransformers:
+  sd-webui:
     driver: bridge
-    name: ktransformers
+    name: sd-webui
